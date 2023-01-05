@@ -4,7 +4,6 @@ pipeline {
     agent any
     environment {
     PATH = "C:\\WINDOWS\\SYSTEM32"
-    PATH = "E:\\Ruby31-x64\\bin"
     }
     stages {
       stage('Setup') {
