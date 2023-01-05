@@ -1,7 +1,7 @@
 #! groovy
 
 pipeline {
-    agent any
+    agent windows
     environment {
     //PATH = "C:\\WINDOWS\\SYSTEM32"
     //GPATH = "E:\\Ruby31-x64\\bin"
