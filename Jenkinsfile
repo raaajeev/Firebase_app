@@ -10,27 +10,26 @@ pipeline {
       stage('Setup') {
         steps {
           echo "Setup"
-          sh "brew install ruby"
           // Install bundler in order to use fastlane
-          sh "gem install bundler"
+          bat "gem install bundler"
           // set the local path for bundles in vendor/bundle
-          sh "bundle config set --local path 'vendor/bundle'"
+          bat "bundle config set --local path 'vendor/bundle'"
           // install bundles if they're not installed
-          sh "bundle check || bundle install --jobs=4 --retry=3"
+          bat "bundle check || bundle install --jobs=4 --retry=3"
         }
       }
 
       stage('Build') {
         steps {
           echo "Building"
-          sh "bundle exec fastlane build"
+          bat "bundle exec fastlane build"
         }
       }
 
       stage('Deploy') {
               steps {
                 echo "Deploying to Firebase"
-                sh "bundle exec fastlane beta"
+                bat "bundle exec fastlane beta"
               }
       }
     }
