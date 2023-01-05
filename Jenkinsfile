@@ -29,7 +29,7 @@ pipeline {
       stage('Deploy') {
               steps {
                 echo "Deploying to Firebase"
-                bat "bundle exec fastlane beta"
+                bat "fastlane beta"
               }
       }
     }
