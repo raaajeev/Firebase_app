@@ -2,14 +2,18 @@
 
 pipeline {
     agent any
-    environment {
-    PATH = "E:\\Ruby31-x64\\bin"
-    //HOME_PATH = "E:\\Ruby31-x64\\bin"
-    }
+    
     stages {
       stage('Setup') {
         steps {
+            
+          checkout scmGit(branches: [[name: '*/main']], extensions: [cloneOption(noTags: false, reference: '', shallow: false, timeout: 120)], userRemoteConfigs: [[url: 'https://github.com/ArbazKPI/Demo--2.git']])  
+          
           echo "Setup"
+            
+          sh "chmod +x gradlew"
+            
+          //chmod -R a+rwx /var/lib/gems/3.0.0
           // Install bundler in order to use fastlane
           sh "gem install bundler"
           // set the local path for bundles in vendor/bundle
@@ -22,16 +26,15 @@ pipeline {
       stage('Build') {
         steps {
           echo "Building"
-          sh "fastlane build"
+          sh "bundle exec fastlane build"
         }
       }
 
       stage('Deploy') {
               steps {
                 echo "Deploying to Firebase"
-                sh "fastlane beta"
+                sh "bundle exec fastlane beta"
               }
       }
     }
 }
-
